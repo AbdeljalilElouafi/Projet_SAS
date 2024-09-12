@@ -6,7 +6,7 @@ int choix=0;
 int count=0;
 int max_etudiant = 300;
 int max_departement = 20;
-int unique = 1;
+
 
 typedef struct{
     int jour;
@@ -27,7 +27,6 @@ typedef struct{
 
 void ajouter(Etudiant student[])
 {
-
     //student[max_etudiant].num_etudiant = unique;
 
     printf("Entrer les infos d'etudiant %d: \n",count + 1 );
@@ -58,8 +57,6 @@ void ajouter(Etudiant student[])
 
     printf("--------------------------------------\n");
 
-    //unique++;
-
 }
 
 void modifier(Etudiant student[])
@@ -81,6 +78,7 @@ void modifier(Etudiant student[])
     for (int i=0; i < count; i++)
     {
             //search loop for the unique number of the student we are looking for.
+
         if (num_recherch == student[i].num_etudiant)
         {
             // giving the old values new ones
@@ -110,8 +108,6 @@ void modifier(Etudiant student[])
 
         }
 
-            printf("Modification effectue avec success! \n");
-
     }
 
 }
@@ -131,7 +127,7 @@ void supprimer(Etudiant student[])
             printf("L'etudiant: %s %s", student[i].prenom, student[i].nom);
             for(int j=i; j < count-1; j++)
             {
-                // a nested loop that relaces the element we want to delete with the element in the index after it.
+                // a nested loop that replaces the element we want to delete with the element in the index after it.
 
                 strcpy(student[j].nom, student[j+1].nom);
                 strcpy(student[j].prenom, student[j+1].prenom);
@@ -143,23 +139,13 @@ void supprimer(Etudiant student[])
                 student[j].note = student[j+1].note;
 
             }
-
-            count--;
+                count--;
         }
-
-
     }
-
-
 }
 
 void afficher(Etudiant student[])
 {
-   //student[max_etudiant].num_etudiant = unique;
-   /*char lastname[20];*/
-
-        //printf("Entrer le prenom d'etudiant ce que vous voulez afficher : ");
-        //scanf("%s", &lastname);
 
      for(int i = 0; i < count; i++){
 
@@ -282,14 +268,30 @@ void statistiques(Etudiant student[])
                    break;
 
             }
-
-
-
       }
-
-
 }
 
+void Rechercher(Etudiant student[]){
+
+    char Le_nom[50];
+
+        printf("Entrer le nom d'etudiant: ");
+        scanf("%s", &Le_nom);
+
+    for(int i = 0; i < count; i++){
+
+       if(strcasecmp(Le_nom, student[i].nom)== 0){
+             printf(" --- LES INFOS D'ETUDIANT : ----------------- %d\n",i + 1 );
+             printf(" --- LE NOM D'ETUDIANT:  -------------------- %s\n", student[i].nom);
+             printf(" --- LE PRENOM D'ETUDIANT: ------------------ %s\n", student[i].prenom);
+             printf(" --- LE NUMERO UNIQUE D'ETUDIANT:  ---------- %d\n", student[i].num_etudiant);
+             printf(" --- LE DATE DE NAISSANCE D'ETUDIANT:  ------ %d/%d/%d\n", student[i].birthdate.jour, student[i].birthdate.mois, student[i].birthdate.annee);
+             printf(" --- LA DEPARTEMENT D'ETUDIANT:  ------------ %s\n", student[i].departemenet);
+             printf(" --- LA NOTE GENERALE D'ETUDIANT:  ---------- %.2f\n", student[i].note);
+             printf("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\n");
+       }
+     }
+}
 int main()
 {
 
@@ -342,12 +344,12 @@ int main()
 
             statistiques(etudiant1);
                   break;
-        /*case 7:
+        case 7:
 
-            modifier(etudiant1);
+            Rechercher(etudiant1);
                   break;
 
-        case 8:
+        /*case 8:
 
             modifier(etudiant1);
                   break;*/
